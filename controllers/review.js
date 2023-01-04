@@ -35,7 +35,7 @@ export const addReview = async (req, res) => {
 
 export const correctReview = async (req, res) => {
   try {
-    const { name, title, nameOfPiece, tags, text, image, grade, _id} = req.body;
+    const { name, title, nameOfPiece, tags, text, image, grade, group, _id} = req.body;
     const review = await Review.findOne({_id});
     if (!review) return res.json({message: 'There aren`t this review in system'});
 
@@ -44,7 +44,8 @@ export const correctReview = async (req, res) => {
     review.tags = tags;
     review.text = text;
     review.image = image;
-    review.grade = grade;    
+    review.grade = grade;   
+    review.group = group; 
 
     await review.save()
 
