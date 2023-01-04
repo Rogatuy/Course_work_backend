@@ -162,6 +162,8 @@ export const addComment = async (req, res) => {
         textComment: textComment,
         createDate: date,
     })
+    
+    review.comments.sort((element) => element.createDate);
 
     await review.save()
          
@@ -184,6 +186,8 @@ export const correctComment = async (req, res) => {
     const comment = review.comments.find((element) => String(`${element._id}`) === _id);
     comment.textComment = textComment
     
+    review.comments.sort((element) => element.createDate);
+    
     await review.save()
          
     res.json({
@@ -204,6 +208,8 @@ export const deleteComment = async (req, res) => {
        
     const comments = review.comments.filter((element) => String(`${element._id}`) !== _id);
     review.comments = comments;
+
+    review.comments.sort((element) => element.createDate);
     
     await review.save()
          
